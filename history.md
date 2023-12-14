@@ -6,4 +6,6 @@
 
 co12 두줄 삭제
 
-bootstrap icon 링크 추가
+bootstrap icon 링크 추가 => 커밋1
+
+loging,join 시도
