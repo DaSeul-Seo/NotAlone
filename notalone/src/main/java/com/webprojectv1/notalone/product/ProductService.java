@@ -30,6 +30,15 @@ public class ProductService {
         return productList;
     }
 
+    public Product selectProductOne(long productId) {
+        Product productEntity = productDao.selectProductOne(productId);
+        
+        // 비즈니스 로직 구현
+        // dto를 만들면 entity를 dto로 바꾸어서 return
+
+        return productEntity;
+    }
+
     // D(Delete)
     public void deleteProduct(long productId) {
         log.info("[ProductService] Product Delete");

@@ -29,6 +29,13 @@ public class ProductDao {
         return productList;
     }
 
+    public Product selectProductOne(long productId) {
+        log.info("[ProductDao] Product Select One");
+        // productRepository에서 select * from product;
+        Product productEntity = productRepository.getReferenceById(productId);
+        return productEntity;
+    }
+
     // U(Update)
     // public void updateProduct(Product productEntity) {
     //     log.info("Product Update: " + productEntity.toString());
