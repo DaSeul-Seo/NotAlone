@@ -1,4 +1,4 @@
-package com.webprojectv1.notalone.model;
+package com.webprojectv1.notalone;
 
 import java.util.Date;
 
@@ -6,9 +6,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
-@Table(name = "cart")
-@Entity(name = "CartDto")
-public class CartDto {
+@Entity
+public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long cartId;
@@ -16,12 +15,12 @@ public class CartDto {
     @ManyToOne
     @JoinColumn(name = "id")
     @Column(nullable = false)
-    private UserDto user;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "productId")
     @Column(nullable = false)
-    private ProductDto product;
+    private Product product;
 
     @Column(nullable = false)
     private Date purchaseDate;

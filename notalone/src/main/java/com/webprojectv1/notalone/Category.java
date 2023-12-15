@@ -1,4 +1,4 @@
-package com.webprojectv1.notalone.model;
+package com.webprojectv1.notalone;
 
 public enum Category {
     FRUITS,

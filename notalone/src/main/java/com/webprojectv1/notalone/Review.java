@@ -1,29 +1,31 @@
-package com.webprojectv1.notalone.model;
+package com.webprojectv1.notalone;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
-@Table(name = "purchase")
-@Entity(name = "PurchaseDto")
-public class PurchaseDto {
+@Entity
+public class Review {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long purchaseId;
+    private long reviewId;
 
     @ManyToOne
     @JoinColumn(name = "id")
     @Column(nullable = false)
-    private UserDto user;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "productId")
     @Column(nullable = false)
-    private ProductDto product;
+    private Product product;
 
     @Column(nullable = false)
-    private String purchaseDate;
+    private double reviewRating;
 
+    
     @Column(nullable = false)
-    private String purchaseCount;
+    private String reviewContent;
+
 }

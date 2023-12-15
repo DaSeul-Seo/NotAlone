@@ -1,12 +1,11 @@
-package com.webprojectv1.notalone.model;
+package com.webprojectv1.notalone;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
-@Table(name = "user")
-@Entity(name = "UserDto")
-public class UserDto {
+@Entity
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
