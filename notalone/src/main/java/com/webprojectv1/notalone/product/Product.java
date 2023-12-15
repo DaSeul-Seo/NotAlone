@@ -1,7 +1,10 @@
-package com.webprojectv1.notalone;
+package com.webprojectv1.notalone.product;
+
+import com.webprojectv1.notalone.CategoryEnum;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
 
 @Data
 @Entity
@@ -14,7 +17,7 @@ public class Product {
     private String productName;
 
     @Enumerated(value = EnumType.STRING)
-    private Category productCategory;
+    private CategoryEnum productCategory;
 
     @Column(nullable = false)
     private double productPrice;

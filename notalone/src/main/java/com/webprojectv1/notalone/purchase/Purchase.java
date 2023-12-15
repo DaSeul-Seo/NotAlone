@@ -1,4 +1,7 @@
-package com.webprojectv1.notalone;
+package com.webprojectv1.notalone.purchase;
+
+import com.webprojectv1.notalone.product.Product;
+import com.webprojectv1.notalone.user.User;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -11,13 +14,11 @@ public class Purchase {
     private long purchaseId;
 
     @ManyToOne
-    @JoinColumn(name = "id")
-    @Column(nullable = false)
+    @JoinColumn(name = "id", nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "productId")
-    @Column(nullable = false)
+    @JoinColumn(name = "productId", nullable = false)
     private Product product;
 
     @Column(nullable = false)

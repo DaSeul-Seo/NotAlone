@@ -1,6 +1,6 @@
 package com.webprojectv1.notalone;
 
-public enum Category {
+public enum CategoryEnum {
     FRUITS,
     MEAT
 }

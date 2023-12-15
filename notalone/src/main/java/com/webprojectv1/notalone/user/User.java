@@ -1,4 +1,4 @@
-package com.webprojectv1.notalone;
+package com.webprojectv1.notalone.user;
 
 import jakarta.persistence.*;
 import lombok.Data;
