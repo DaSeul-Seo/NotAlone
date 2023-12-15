@@ -1,7 +1,5 @@
 package com.webprojectv1.notalone.product;
 
-import com.webprojectv1.notalone.CategoryEnum;
-
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -10,14 +8,14 @@ import lombok.Data;
 @Entity
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long productId;
 
     @Column(nullable = false)
     private String productName;
 
-    @Enumerated(value = EnumType.STRING)
-    private CategoryEnum productCategory;
+    // @Enumerated(value = EnumType.STRING)
+    private String productCategory;
 
     @Column(nullable = false)
     private double productPrice;
