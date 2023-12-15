@@ -1,4 +1,4 @@
-package com.webprojectv1.notalone;
+package com.webprojectv1.notalone.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
