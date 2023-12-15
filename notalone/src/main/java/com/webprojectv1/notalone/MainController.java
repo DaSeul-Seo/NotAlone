@@ -25,4 +25,10 @@ public class MainController {
     public String join(){
             return "join";
     }
+
+    @GetMapping("/admin")    
+    public String admin(){
+            return "admin";
+    }
+
 }
