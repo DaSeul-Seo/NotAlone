@@ -15,7 +15,9 @@ public class MainController {
         private ProductService productService;
 
     @GetMapping("/")    
-    public String front(){
+    public String front(Model model){
+        model.addAttribute("productList", productService.selectProductAll());
+        
             return "index";
     }
 

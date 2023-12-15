@@ -14,7 +14,6 @@ public class Product {
     @Column(nullable = false)
     private String productName;
 
-    // @Enumerated(value = EnumType.STRING)
     private String productCategory;
 
     @Column(nullable = false)
