@@ -17,7 +17,7 @@ public class Product {
     private String productCategory;
 
     @Column(nullable = false)
-    private double productPrice;
+    private int productPrice;
 
     @Column(nullable = false)
     private double productRating;

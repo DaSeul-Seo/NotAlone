@@ -1,5 +1,7 @@
 package com.webprojectv1.notalone.purchase;
 
+import java.util.Date;
+
 import com.webprojectv1.notalone.product.Product;
 import com.webprojectv1.notalone.user.User;
 
@@ -22,8 +24,8 @@ public class Purchase {
     private Product product;
 
     @Column(nullable = false)
-    private String purchaseDate;
+    private Date purchaseDate;
 
     @Column(nullable = false)
-    private String purchaseCount;
+    private int purchaseCount;
 }
