@@ -18,7 +18,7 @@ class NotaloneApplicationTests {
 		Product p = new Product();
 		p.setProductName("Sample Product");
 		p.setProductCategory("CategoryEnum.MEAT");
-		p.setProductPrice(10.0);
+		p.setProductPrice(10);
 		p.setProductRating(4.5);
 		p.setProductStock(100);
 		p.setProductImage("sample_image.jpg");
