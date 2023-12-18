@@ -34,9 +34,9 @@ public class SiteUser {
     @Column(nullable = false)
     private char isGrant;
 
-    @OneToMany(mappedBy = "siteuser")
-    private List<Cart> cartList;
+    @OneToMany(mappedBy = "siteUser")
+    private List<Cart> cartList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "siteuser")
-    private List<Review> reviewList;
+    @OneToMany(mappedBy = "siteUser")
+    private List<Review> reviewList = new ArrayList<>();
 }

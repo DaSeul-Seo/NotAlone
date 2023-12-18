@@ -1,8 +1,5 @@
 package com.webprojectv1.notalone.purchase;
 
-import java.util.Date;
-
-
 import jakarta.persistence.*;
 import lombok.Data;
 

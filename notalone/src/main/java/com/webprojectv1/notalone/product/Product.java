@@ -32,9 +32,9 @@ public class Product {
     private String productImage;
 
     @OneToMany(mappedBy = "product")
-    private List<Review> reviewList;
+    private List<Review> reviewList = new ArrayList<>();
 
-    @ManyToOne
-    private Cart cart;
+    @ManyToMany(mappedBy = "productList")
+    private List<Cart> cartList = new ArrayList<>();
 
 }

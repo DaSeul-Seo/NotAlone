@@ -13,20 +13,17 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long reviewId;
-
-    // @ManyToOne
-    // @JoinColumn(name = "id", nullable = false)
-    // private SiteUser user;
-
-    // @ManyToOne
-    // @JoinColumn(name = "productId", nullable = false)
-    // private Product product;
-
+    
     @Column(nullable = false)
     private double reviewRating;
-
     
     @Column(nullable = false)
     private String reviewContent;
+    
+    @ManyToOne
+    private SiteUser siteUser;
 
+    @ManyToOne
+    private Product product;
+    
 }
