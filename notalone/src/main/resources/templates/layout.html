@@ -86,7 +86,8 @@ https://www.tooplate.com/view/2127-little-fashion
               </li>
             </ul>
             <div class="d-none d-lg-block">
-              <a th:href="@{/login}" class="bi-person custom-icon me-3"></a>
+              <a sec:authorize="isAnonymous()" th:href="@{/user/login}" class="bi-person custom-icon me-3"></a>
+              <a sec:authorize="isAuthenticated()" th:href="@{/user/logout}" class="bi-person custom-icon me-3"></a>
               <a th:href="@{/cart}" class="bi-bag custom-icon"></a>
             </div>
           </div>
