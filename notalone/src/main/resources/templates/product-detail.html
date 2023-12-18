@@ -51,37 +51,33 @@
               <div class="col-lg-6 col-12">
                 <select
                   class="form-select cart-form-select"
-                  id="inputGroupSelect01"
-                >
-                  <option selected="">Quantity</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
+                  id="inputGroupSelect01">
+                <option th:each="val: ${#numbers.sequence(1, product.productStock)}"
+                          th:value="${val}"
+                          th:text="${val}"
+                          ></option>
                 </select>
               </div>
               <div class="col-lg-6 col-12 mt-4 mt-lg-0">
                 <button
-                  type="submit"
+                  type="button"
                   class="btn custom-btn cart-btn"
                   data-bs-toggle="modal"
                   data-bs-target="#cart-modal"
+                  onclick="updateModalContent()"
                 >
                   Add to Cart
                 </button>
               </div>
               <p>
                 <a href="#" class="product-additional-link">Details</a>
-                <a href="#" class="product-additional-link"
-                  >Delivery and Payment</a
-                >
               </p>
             </div>
           </div>
         </div>
       </div>
     </section>
+    <!-- Modal -->
     <div
       class="modal fade"
       id="cart-modal"
@@ -118,11 +114,7 @@
                   class="product-price text-muted mt-3"
                   th:text="${product.productPrice}"
                 ></p>
-                <p class="product-p">Quatity: <span class="ms-1">4</span></p>
-                <p class="product-p">Colour: <span class="ms-1">Black</span></p>
-                <p class="product-p pb-3">
-                  Size: <span class="ms-1">S/S</span>
-                </p>
+                <p class="product-p">Quatity: <span id="selectedOptionValue" class="ms-1"></span></p>
                 <div class="border-top mt-4 pt-3">
                   <p class="product-p">
                     <strong>Total: <span class="ms-1">$100</span></strong>
@@ -133,7 +125,7 @@
           </div>
           <div class="modal-footer">
             <div class="row w-50">
-              <button type="button" class="btn custom-btn cart-btn ms-lg-4">
+              <button type="submit" class="btn custom-btn cart-btn ms-lg-4">
                 Checkout
               </button>
             </div>
@@ -142,4 +134,11 @@
       </div>
     </div>
   </div>
+
+  <script th:inline="javascript">
+    function updateModalContent() {
+        var selectedOption = document.getElementById("inputGroupSelect01").value;
+        document.getElementById("selectedOptionValue").innerHTML = selectedOption;
+    }
+  </script>
 </html>

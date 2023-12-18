@@ -241,6 +241,9 @@ strong {
   border-radius: 0;
   padding-top: 15px;
   padding-bottom: 15px;
+  overflow-y: auto;
+  min-height: 10px;
+  max-height: 50px;
 }
 
 .cart-btn {
