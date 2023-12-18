@@ -25,13 +25,13 @@ public class UserController {
     @PostMapping("/signup")
     public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "signup_form";
+            return "sign-up";
         }
 
         if (!userCreateForm.getPassword1().equals(userCreateForm.getPassword2())) {
             bindingResult.rejectValue("password2", "passwordInCorrect", 
                     "2개의 패스워드가 일치하지 않습니다.");
-            return "signup_form";
+            return "sign-up";
         }
 
         userService.create(userCreateForm.getUsername(), 
