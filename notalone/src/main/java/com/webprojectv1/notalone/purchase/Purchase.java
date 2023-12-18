@@ -2,8 +2,6 @@ package com.webprojectv1.notalone.purchase;
 
 import java.util.Date;
 
-import com.webprojectv1.notalone.product.Product;
-import com.webprojectv1.notalone.user.User;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -15,17 +13,17 @@ public class Purchase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long purchaseId;
 
-    @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
-    private User user;
+    // @ManyToOne
+    // @JoinColumn(name = "id", nullable = false)
+    // private SiteUser user;
 
-    @ManyToOne
-    @JoinColumn(name = "productId", nullable = false)
-    private Product product;
+    // @OneToMany
+    // @JoinColumn(name = "productId", nullable = false)
+    // private Product product;
 
-    @Column(nullable = false)
-    private Date purchaseDate;
+    // @Column(nullable = false)
+    // private Date purchaseDate;
 
-    @Column(nullable = false)
-    private int purchaseCount;
+    // @Column(nullable = false)
+    // private int purchaseCount;
 }

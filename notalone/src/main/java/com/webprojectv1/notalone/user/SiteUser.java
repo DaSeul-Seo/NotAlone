@@ -1,28 +1,42 @@
 package com.webprojectv1.notalone.user;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import com.webprojectv1.notalone.cart.Cart;
+import com.webprojectv1.notalone.review.Review;
 
-@Getter
-@Setter
+import jakarta.persistence.*;
+import lombok.Data;
+
+import java.util.*;
+
+@Data
 @Entity
 public class SiteUser {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-    @Column(unique = true)
-    private String username;
+    @Column(nullable = false, unique = true)
+    private String userId;
 
-    private String password;
+    @Column(nullable = false)
+    private String userPw;
 
-    @Column(unique = true)
-    private String email;
+    @Column(nullable = false)
+    private String userName;
 
+    @Column(nullable = false)
+    private String userBirth;
+
+    private String userPhoneNumber;
+    
+    private String userAddress;
+
+    @Column(nullable = false)
+    private char isGrant;
+
+    @OneToMany(mappedBy = "siteuser")
+    private List<Cart> cartList;
+
+    @OneToMany(mappedBy = "siteuser")
+    private List<Review> reviewList;
 }

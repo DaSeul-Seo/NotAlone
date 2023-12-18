@@ -22,15 +22,15 @@ public class UserService {
     private UserDao userDao;
 
     // C(Insert) & U(Update)
-    public void insertAndUpdateUser(User userDto) {
+    public void insertAndUpdateUser(SiteUser userDto) {
         log.info("[UserService] User Insert And Update");
         userDao.insertUpdateUser(userDto);
     }
 
     // R(Select)
-    public List<User> selectUserAll() {
+    public List<SiteUser> selectUserAll() {
         log.info("[UserService] User Select");
-        List<User> userList = userDao.selectUserAll();
+        List<SiteUser> userList = userDao.selectUserAll();
         return userList;
     }
 
@@ -42,9 +42,9 @@ public class UserService {
 
     public SiteUser create(String username, String email, String password) {
         SiteUser user = new SiteUser();
-        user.setUsername(username);
-        user.setEmail(email);
-        user.setPassword(passwordEncoder.encode(password));
+        user.setUserName(username);
+        user.setUserAddress(email);
+        user.setUserPw(passwordEncoder.encode(password));
         this.userRepository.save(user);
         return user;
     }

@@ -64,7 +64,6 @@
                   class="btn custom-btn cart-btn"
                   data-bs-toggle="modal"
                   data-bs-target="#cart-modal"
-                  onclick="updateModalContent()"
                 >
                   Add to Cart
                 </button>
@@ -97,48 +96,57 @@
           </div>
           <div class="modal-body">
             <div class="row">
-              <div class="col-lg-6 col-12 mt-4 mt-lg-0">
-                <img
-                  th:src="${product.productImage}"
-                  class="img-fluid product-image"
-                  alt=""
-                />
-              </div>
-              <div class="col-lg-6 col-12 mt-3 mt-lg-0">
-                <h3
+              <h3
                   class="modal-title"
-                  id="exampleModalLabel"
-                  th:text="${product.productName}"
-                ></h3>
-                <p
-                  class="product-price text-muted mt-3"
-                  th:text="${product.productPrice}"
-                ></p>
-                <p class="product-p">Quatity: <span id="selectedOptionValue" class="ms-1"></span></p>
-                <div class="border-top mt-4 pt-3">
-                  <p class="product-p">
-                    <strong>Total: <span class="ms-1">$100</span></strong>
-                  </p>
+                  style="text-align: center;"
+                >장바구니에 담겼습니다.</h3>
+                <div class="row w-50">
+                  <form th:action="@{/saveCart}" method="post">
+                    <button type="submit" id="saveCart" class="btn custom-btn cart-btn ms-lg-4" style="">Checkout</button>
+                    <!-- <input type="submit" class="btn custom-btn cart-btn ms-lg-4" value="Checkout"> -->
+                  </form>
                 </div>
-              </div>
             </div>
           </div>
-          <div class="modal-footer">
+          <!-- <div class="modal-footer">
             <div class="row w-50">
-              <button type="submit" class="btn custom-btn cart-btn ms-lg-4">
+              <button type="button" id="saveCart" class="btn custom-btn cart-btn ms-lg-4" onclick="insertCart()">
                 Checkout
               </button>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
   </div>
 
-  <script th:inline="javascript">
-    function updateModalContent() {
-        var selectedOption = document.getElementById("inputGroupSelect01").value;
-        document.getElementById("selectedOptionValue").innerHTML = selectedOption;
-    }
+  <script>
+    // $(document).ready(function() {     
+    //     $('#saveCart').on('show.bs.modal', function(event) {          
+    //         product = $(event.relatedTarget).data('product');
+    //         user = $(event.relatedTarget).data('user');
+    //         purchaseDate = 
+    //     });
+    // });
+    // let productName = "";
+    // let productStock = 0;
+    // let selectedOption = document.getElementById("inputGroupSelect01");
+    // let selectedValue = selectedOption.options[selectedOption.selectedIndex].text;
+    // $(document).ready(function() {
+    //   $("#saveCart").on('show.bs.modal', function(event) {
+    //     productName = $(event.relatedTarget).data("productName");
+    //     productStock = selectedValue;
+    //   })
+    // })
   </script>
+  <!-- <script th:inline="javascript">
+    function updateModalContent() {
+        let selectedOption = document.getElementById("inputGroupSelect01");
+        let selectedValue = selectedOption.options[selectedOption.selectedIndex].text;
+        console.log("dd : " + selectedValue);
+        let modalDisplayVal = document.getElementById("selectedOptionValue");
+        modalDisplayVal.innerText = selectedValue;
+    }
+  </script> -->
+
 </html>

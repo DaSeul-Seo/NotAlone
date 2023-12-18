@@ -1,18 +1,20 @@
 package com.webprojectv1.notalone;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.webprojectv1.notalone.cart.Cart;
 import com.webprojectv1.notalone.cart.CartService;
 import com.webprojectv1.notalone.product.ProductService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class MainController {
 
@@ -57,9 +59,10 @@ public class MainController {
         return "cart";
     }
 
-    @GetMapping("/cartinsert")    
-    public void cartinsert(@ModelAttribute Cart cartDto){
-        cartDto.setPurchaseDate(new Date());
+    @PostMapping("/saveCart")    
+    public String saveCart(@ModelAttribute Cart cartDto){
+        log.info("saveCart");
         cartService.insertAndUpdateUser(cartDto);
+        return "redirect:/";
     }
 }

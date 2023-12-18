@@ -1,8 +1,12 @@
 package com.webprojectv1.notalone.product;
 
+import com.webprojectv1.notalone.cart.Cart;
+import com.webprojectv1.notalone.review.Review;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.*;
 
 @Data
 @Entity
@@ -26,5 +30,11 @@ public class Product {
     private int productStock;
     
     private String productImage;
+
+    @OneToMany(mappedBy = "product")
+    private List<Review> reviewList;
+
+    @ManyToOne
+    private Cart cart;
 
 }

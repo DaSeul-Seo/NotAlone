@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.webprojectv1.notalone.product.IProductRepository;
 import com.webprojectv1.notalone.product.Product;
 import com.webprojectv1.notalone.user.IUserRepository;
-import com.webprojectv1.notalone.user.User;
+import com.webprojectv1.notalone.user.SiteUser;
 
 import java.util.*;
 import lombok.extern.slf4j.Slf4j;
