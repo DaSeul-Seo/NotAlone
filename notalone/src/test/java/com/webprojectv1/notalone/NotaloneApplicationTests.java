@@ -22,6 +22,9 @@ class NotaloneApplicationTests {
 	@Autowired
 	IUserRepository userRepository;
 
+	@Autowired
+	UserService userService;
+
 	@Test
 	void createProduct() {
 		Product p = new Product();
@@ -33,8 +36,11 @@ class NotaloneApplicationTests {
 		p.setProductImage("sample_image.jpg");
 
 		iProductRepository.save(p);
+	}
 
-
+	@Test
+	public void testAssignAdminRoleToUserWithId1() {
+		userService.assignAdminRoleToUser(161L);
 	}
 
 	@Test

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,4 +45,11 @@ public class UserService {
         this.userRepository.save(user);
         return user;
     }
+
+    public void assignAdminRoleToUser(long userId) {
+        userRepository.findById(userId).ifPresent(user -> {
+            user.setRole(UserRole.ADMIN);
+            userRepository.save(user);
+        });
+    } 
 }
