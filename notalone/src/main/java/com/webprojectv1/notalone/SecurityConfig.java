@@ -9,22 +9,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
-                .formLogin((formLogin) -> formLogin
-                        .loginPage("/user/login")
-                        .defaultSuccessUrl("/"));
-        return http.build();
-    }
-=======
         @Bean
         SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
                 http
@@ -44,7 +34,6 @@ public class SecurityConfig {
                                                 .invalidateHttpSession(true));
                 return http.build();
         }
->>>>>>> 9d92afc (로그아웃기능)
 
         @Bean
         PasswordEncoder passwordEncoder() {
