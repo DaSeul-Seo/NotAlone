@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.security.Principal;
 
 import com.webprojectv1.notalone.product.ProductService;
+import com.webprojectv1.notalone.user.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,10 +20,13 @@ public class MainController {
 
     @Autowired
     private ProductService productService;
-    
+    @Autowired
+    private CartService cartService;
+    @Autowired
+    private UserService userService;
 
-    @GetMapping("/")    
-    public String front(Model model){
+    @GetMapping("/")
+    public String front(Model model) {
         model.addAttribute("productList", productService.selectProductAll());
         return "index";
     }
@@ -33,40 +37,42 @@ public class MainController {
         return "product-detail";
     }
 
-    @GetMapping("/login")    
-    public String login(){
-            return "login";
+    @GetMapping("/login")
+    public String login() {
+        return "login";
     }
 
-    @GetMapping("/join")    
-    public String join(){
-            return "join";
+    @GetMapping("/join")
+    public String join() {
+        return "join";
     }
 
-    @GetMapping("/admin")    
-    public String admin(Model model){
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/admin")
+    public String admin(Model model) {
         model.addAttribute("productList", productService.selectProductAll());
 
-            return "admin";
+        return "admin";
     }
 
-    @GetMapping("/cart")    
-    public String cart(Model model){
+    @GetMapping("/cart")
+    public String cart(Model model) {
         model.addAttribute("cartList", cartService.selectCartAll());
         return "cart";
     }
 
-    @PostMapping("/saveCart")    
-    public String saveCart(@ModelAttribute Cart cartDto){
+    @PostMapping("/saveCart")
+    public String saveCart(@ModelAttribute Cart cartDto) {
         log.info("saveCart");
         cartService.insertAndUpdateUser(cartDto);
         return "redirect:/";
     }
 
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("/mypage")    
-    public String mypage(Principal principal){
-            return "mypage";
+    @GetMapping("/mypage")
+    public String mypage(Model model, Principal principal) {
+        model.addAttribute("user", userService.getUser(principal.getName()));
+        return "mypage";
     }
 
 }

@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.webprojectv1.notalone.DataNotFoundException;
+
 import java.util.List;
+import java.util.Optional;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,6 +47,15 @@ public class UserService {
         user.setUserPw(passwordEncoder.encode(password));
         this.userRepository.save(user);
         return user;
+    }
+
+    public SiteUser getUser(String userId){
+        Optional<SiteUser> siteUser = this.userRepository.findByUserId(userId);
+        if (siteUser.isPresent()) {
+            return siteUser.get();
+        } else {
+            throw new DataNotFoundException("siteuser not found");
+        }
     }
 
 }
