@@ -4,12 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import com.webprojectv1.notalone.cart.Cart;
-import com.webprojectv1.notalone.cart.CartService;
 import com.webprojectv1.notalone.product.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,14 +16,12 @@ public class MainController {
 
     @Autowired
     private ProductService productService;
-    @Autowired
-    private CartService cartService;
+    
 
     @GetMapping("/")    
     public String front(Model model){
         model.addAttribute("productList", productService.selectProductAll());
-        
-            return "index";
+        return "index";
     }
 
     @GetMapping(value = "/product/detail/{id}")
@@ -53,22 +47,9 @@ public class MainController {
             return "admin";
     }
 
-    @GetMapping("/cart")    
-    public String cart(Model model){
-        model.addAttribute("cartList", cartService.selectCartAll());
-        return "cart";
-    }
-
-    @PostMapping("/saveCart")    
-    public String saveCart(@ModelAttribute Cart cartDto){
-        log.info("saveCart");
-        cartService.insertAndUpdateUser(cartDto);
-        return "redirect:/";
-    }
-
     @GetMapping("/mypage")    
     public String mypage(){
-            return "mypage";
+        return "mypage";
     }
 
 }
