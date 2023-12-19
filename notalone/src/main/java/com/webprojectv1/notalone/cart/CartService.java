@@ -15,7 +15,7 @@ public class CartService {
     // C(Insert) & U(Update)
     public void insertAndUpdateUser(Cart cartDto) {
         log.info("[CartService] Cart Insert And Update");
-        cartDto.setPurchaseDate(new Date());
+        // cartDto.setPurchaseDate(new Date());
         // cartDto.setProduct(null);
         // cartDto.setUser(null);
         cartDao.insertUpdateCart(cartDto);

@@ -18,10 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class MainController {
 
-        @Autowired
-        private ProductService productService;
-        @Autowired
-        private CartService cartService;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private CartService cartService;
 
     @GetMapping("/")    
     public String front(Model model){
@@ -65,4 +65,10 @@ public class MainController {
         cartService.insertAndUpdateUser(cartDto);
         return "redirect:/";
     }
+
+    @GetMapping("/mypage")    
+    public String mypage(){
+            return "mypage";
+    }
+
 }
