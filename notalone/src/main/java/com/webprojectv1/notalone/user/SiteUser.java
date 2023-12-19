@@ -29,8 +29,11 @@ public class SiteUser {
     
     private String userAddress;
 
-    @OneToMany(mappedBy = "siteUser")
-    private List<Cart> cartList = new ArrayList<>();
+    @OneToOne(mappedBy = "siteUser")
+    private Cart cart;
+
+    // @OneToMany(mappedBy = "siteUser")
+    // private List<Cart> cartList = new ArrayList<>();
 
     @OneToMany(mappedBy = "siteUser")
     private List<Review> reviewList = new ArrayList<>();

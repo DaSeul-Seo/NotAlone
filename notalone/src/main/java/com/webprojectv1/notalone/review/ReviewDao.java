@@ -3,9 +3,6 @@ package com.webprojectv1.notalone.review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.webprojectv1.notalone.product.IProductRepository;
-import com.webprojectv1.notalone.user.IUserRepository;
-
 import java.util.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,12 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 public class ReviewDao {
     @Autowired
     private IReviewRepository reviewRepository;
-
-    @Autowired
-    private IUserRepository userRepository;
-
-    @Autowired
-    private IProductRepository productRepository;
 
     // C(Insert) & U(Update)
     // save :  엔티티의 ID가 이미 존재하면 업데이트를 수행하고, 

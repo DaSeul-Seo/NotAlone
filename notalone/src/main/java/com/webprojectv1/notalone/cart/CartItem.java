@@ -1,7 +1,4 @@
 package com.webprojectv1.notalone.cart;
-
-import java.util.Date;
-
 import com.webprojectv1.notalone.product.Product;
 
 import jakarta.persistence.*;
@@ -15,18 +12,26 @@ public class CartItem {
     private long cartItemId;
 
     @Column(nullable = false)
-    private Date cartDate = new Date();
+    private int cartItemCount;
 
-    @Column(nullable = false)
-    private int cartCount;
-
-    @Column(nullable = false)
-    // 구매상태 : 구매함 1, 구매안함 0
-    private char cartStatus = '0';
-
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="productId")
     private Product product;
 
-    // @ManyToOne
-    // private Cart cart;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="cartId")
+    private Cart cart;
+
+    public static CartItem createCartItem(Cart cart, Product product, int cartItemCount) {
+        CartItem cartItem = new CartItem();
+        cartItem.setCart(cart);
+        cartItem.setProduct(product);
+        cartItem.setCartItemCount(cartItemCount);
+        return cartItem;
+    }
+
+    // 이미 담겨있는 물건 또 담을 경우 수량 증가
+    public void addCount(int cartItemCount) {
+        this.cartItemCount += cartItemCount;
+    }
 }

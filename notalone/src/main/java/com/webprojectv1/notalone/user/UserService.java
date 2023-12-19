@@ -35,6 +35,11 @@ public class UserService {
         return userList;
     }
 
+    public SiteUser selectUserOne(long id) {
+        SiteUser siteUser = userDao.selectUserOne(id);
+        return siteUser;
+    }
+
     // D(Delete)
     public void deleteUser(long userId) {
         log.info("[UserService] User Delete");

@@ -3,6 +3,9 @@ package com.webprojectv1.notalone.cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.webprojectv1.notalone.product.Product;
+import com.webprojectv1.notalone.user.SiteUser;
+
 import java.util.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,12 +16,15 @@ public class CartService {
     private CartDao cartDao;
 
     // C(Insert) & U(Update)
-    public void insertAndUpdateUser(Cart cartDto) {
-        log.info("[CartService] Cart Insert And Update");
-        // cartDto.setPurchaseDate(new Date());
-        // cartDto.setProduct(null);
-        // cartDto.setUser(null);
-        cartDao.insertUpdateCart(cartDto);
+    public void insertCart(SiteUser siteUserDto, Product productDto, int amount) {
+        log.info("[CartService] Cart Insert");
+        cartDao.insertCart(siteUserDto, productDto, amount);
+    }
+
+    // 카트 상품 리스트 중 해당하는 유저가 담은 상품만 반환
+    // 유저의 카트 id와 카트상품의 카트 id가 같아야 함
+    public List<CartItem> allUserCartView(Cart userCart) {
+        return cartDao.allUserCartView(userCart);
     }
 
     // R(Select)

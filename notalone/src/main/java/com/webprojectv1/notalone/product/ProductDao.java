@@ -16,8 +16,8 @@ public class ProductDao {
     // C(Insert) & U(Update)
     // save :  엔티티의 ID가 이미 존재하면 업데이트를 수행하고, 
     //         ID가 없으면 새로운 엔티티를 저장하기 때문에 합침
-    public void insertUpdateProduct(Product productEntity) {
-        log.info("[ProductDao] Product Insert And Update : " + productEntity.toString());
+    public void insertProduct(Product productEntity) {
+        log.info("[ProductDao] Product Insert : " + productEntity.toString());
         productRepository.save(productEntity);
     }
 
@@ -37,10 +37,19 @@ public class ProductDao {
     }
 
     // U(Update)
-    // public void updateProduct(Product productEntity) {
-    //     log.info("Product Update: " + productEntity.toString());
-    //     productRepository.save(productEntity);
-    // }
+    public void updateProduct(Product productEntity, Long productId) {
+        log.info("[ProductDao] Product Update: " + productEntity.toString());
+        Product updateProduct = productRepository.getReferenceById(productId);
+        updateProduct.setProductName(productEntity.getProductName());
+        updateProduct.setProductContent(productEntity.getProductContent());
+        updateProduct.setProductCategory(productEntity.getProductCategory());
+        updateProduct.setProductPrice(productEntity.getProductPrice());
+        updateProduct.setProductRating(productEntity.getProductRating());
+        updateProduct.setProductStock(productEntity.getProductStock());
+        updateProduct.setProductImage(productEntity.getProductImage());
+
+        productRepository.save(updateProduct);
+    }
 
     // D(Delete) : id
     public void deleteProduct(long productId) {

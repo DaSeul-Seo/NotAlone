@@ -42,38 +42,34 @@
             </div>
             <div class="product-description">
               <strong class="d-block mt-4 mb-2">Description</strong>
-              <p class="lead mb-5">
-                Over three years in business, We’ve had the chance to work on a
-                variety of projects, with companies
-              </p>
+              <p class="lead mb-5" th:text="${product.productContent}"></p>
             </div>
             <div class="product-cart-thumb row">
-              <div class="col-lg-6 col-12">
-                <select
-                  class="form-select cart-form-select"
-                  id="inputGroupSelect01"
-                >
-                <option th:each="val: ${#numbers.sequence(1, product.productStock)}"
-                          th:value="${val}"
-                          th:text="${val}"
-                          ></option>
-                </select>
-              </div>
-              <div class="col-lg-6 col-12 mt-4 mt-lg-0">
-                <!-- <form 
-                  class="d-flex"
-                  sec:authorize="hasRole('ROLE_USER')"
-                  th:action="@{/user/cart/{id}/{itemId}(id=${user.id}, itemId=${item.id})}"
-                  method="post"></form> -->
-                <button 
-                  type="button"
-                  class="btn custom-btn cart-btn"
-                  th:action="@{/cart/saveCartItem}"
-                  method="post"
+              <form  
+                method="post"
+                th:action="@{/cart/insertCart/{producrId}(producrId=${product.productId})}"
+              >
+                <div class="col-lg-6 col-12">
+                  <select
+                    class="form-select cart-form-select"
+                    id="amount"
+                    name="amount"
                   >
-                  Add to Cart
-                </button>
-              </div>
+                  <option th:each="val: ${#numbers.sequence(1, product.productStock)}"
+                            th:value="${val}"
+                            th:text="${val}"
+                            ></option>
+                  </select>
+                </div>
+                <div class="col-lg-6 col-12 mt-4 mt-lg-0">
+                  <button 
+                    type="submit"
+                    class="btn custom-btn cart-btn"
+                    >
+                    Add to Cart
+                  </button>
+                </div>
+              </form>
               <p>
                 <a href="#" class="product-additional-link">Details</a>
               </p>

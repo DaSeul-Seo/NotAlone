@@ -4,15 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.webprojectv1.notalone.product.Product;
 import com.webprojectv1.notalone.product.ProductService;
+import com.webprojectv1.notalone.user.SiteUser;
+import com.webprojectv1.notalone.user.UserService;
 
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.*;
 
 @Slf4j
 @Controller
@@ -20,21 +23,49 @@ import lombok.extern.slf4j.Slf4j;
 public class CartController {
 
     @Autowired
-    private CartItemService cartItemService;
+    private CartService cartService;
 
-    @GetMapping
-    public String getcartItemList(Model model){
-        model.addAttribute("cartItemList", cartItemService.selectCartItemAll());
-        return "cart";
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private ProductService productService;
+
+    @GetMapping("/{id}")
+    public String getcartItemList(@PathVariable("id") Long id, Model model){
+        SiteUser siteUser = userService.selectUserOne(id);
+        Cart cart = siteUser.getCart();
+
+        if (cart == null) {
+            return "redirect:/";
+        }
+
+        // 장바구니에 들어있는 아이템 모두 가져오기
+        List<CartItem> cartItemList = cartService.allUserCartView(cart);
+
+        // 장바구니에 들어있는 상품들의 총 가격
+        int totalPrice = 0;
+        for (CartItem cartitem : cartItemList) {
+            totalPrice += cartitem.getCartItemCount() * cartitem.getProduct().getProductPrice();
+        }
+
+        model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("totalCount", cart.getCartCount());
+        model.addAttribute("cartItems", cartItemList);
+        model.addAttribute("user", userService.selectUserOne(id));
+
+        return "redirect:/";
     }
 
-    @PostMapping("/saveCartItem")    
-    public String saveCartItem(Cart cart, @RequestParam("productId") long productId, Model model){
-        log.info("saveCartItem");
-        // log.info("cartItemDto : " + cartItemDto.toString());
-        // Product selectProduct = productService.selectProductOne(cartItemDto.getProduct().getProductId());
-        // cartItemDto.setProduct(selectProduct);
-        // cartItemService.insertCartItem(cartItemDto);
+    // @PostMapping("/insertCart/{id}/{productId}")
+    @PostMapping("/insertCart/{productId}")
+    // public String insertCart(@PathVariable("id") Long id, @PathVariable("productId") Long productId, int amount){
+    public String insertCart(@PathVariable("productId") Long productId, int amount){
+        SiteUser siteUser = userService.selectUserOne(1);
+        Product product = productService.selectProductOne(productId);
+
+        cartService.insertCart(siteUser, product, amount);
+
         return "redirect:/";
     }
 
@@ -45,10 +76,10 @@ public class CartController {
     //     return "redirect:/";
     // }
 
-    @PostMapping("/delete")    
-    public String deleteCartItem(@ModelAttribute CartItem cartItemDto){
-        log.info("deleteCartItem");
-        cartItemService.deleteCartItem(cartItemDto.getCartItemId());
-        return "redirect:/";
-    }
+    // @PostMapping("/delete")    
+    // public String deleteCartItem(@ModelAttribute CartItem cartItemDto){
+    //     log.info("deleteCartItem");
+    //     cartItemService.deleteCartItem(cartItemDto.getCartItemId());
+    //     return "redirect:/";
+    // }
 }

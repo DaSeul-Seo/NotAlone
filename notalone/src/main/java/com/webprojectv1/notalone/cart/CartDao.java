@@ -3,6 +3,10 @@ package com.webprojectv1.notalone.cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.webprojectv1.notalone.product.IProductRepository;
+import com.webprojectv1.notalone.product.Product;
+import com.webprojectv1.notalone.user.SiteUser;
+
 import java.util.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,14 +14,66 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class CartDao {
     @Autowired
+    private ICartItemRepository cartItemRepository;
+
+    @Autowired
     private ICartRepository cartRepository;
+
+    @Autowired
+    private IProductRepository productRepository;
 
     // C(Insert) & U(Update)
     // save :  엔티티의 ID가 이미 존재하면 업데이트를 수행하고, 
     //         ID가 없으면 새로운 엔티티를 저장하기 때문에 합침
-    public void insertUpdateCart(Cart cartEntity) {
-        log.info("[CartDao] Cart Insert And Update : " + cartEntity.toString());
-        cartRepository.save(cartEntity);
+    public void insertCart(SiteUser siteUserDto, Product productDto, int amount) {
+        log.info("[CartDao] Cart Insert");
+        Cart cart = cartRepository.getReferenceById(siteUserDto.getId());
+
+        // 장바구니가 존재하지 않는다면
+        if (cart == null) {
+            cart = Cart.createCart(siteUserDto);
+            cartRepository.save(cart);
+        }
+
+        Product product = productRepository.getReferenceById(productDto.getProductId());
+        CartItem cartItem = cartItemRepository.findByCart_CartIdAndProduct_ProductId(cart.getCartId(), product.getProductId());
+
+        // 상품이 장바구니에 존재하지 않는다면 카트상품 생성 후 추가
+        if (cartItem == null) {
+            cartItem = CartItem.createCartItem(cart, product, amount);
+            cartItemRepository.save(cartItem);
+        }
+        // 상품이 장바구니에 이미 존재한다면 수량만 증가
+        else {
+            CartItem update = cartItem;
+            update.setCart(cartItem.getCart());
+            update.setProduct(cartItem.getProduct());
+            update.addCount(amount);
+            update.setCartItemCount(update.getCartItemCount());
+            cartItemRepository.save(update);
+        }
+
+        // 카트 상품 총 개수 증가
+        cart.setCartCount(cart.getCartCount()+amount);
+    }
+
+    public List<CartItem> allUserCartView(Cart userCart) {
+        // 유저의 카트 id를 꺼냄
+        long userCartId = userCart.getCartId();
+
+        // id에 해당하는 유저가 담은 상품들 넣어둘 곳
+        List<CartItem> UserCartItems = new ArrayList<>();
+
+        // 유저 상관 없이 카트에 있는 상품 모두 불러오기
+        List<CartItem> CartItems = cartItemRepository.findAll();
+
+        for(CartItem cartItem : CartItems) {
+            if(cartItem.getCart().getCartId() == userCartId) {
+                UserCartItems.add(cartItem);
+            }
+        }
+
+        return UserCartItems;
     }
 
     // R(Select)

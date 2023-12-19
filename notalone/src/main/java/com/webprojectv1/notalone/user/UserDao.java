@@ -3,6 +3,7 @@ package com.webprojectv1.notalone.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.*;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,13 @@ public class UserDao {
         // userRepository에서 select * from user;
         List<SiteUser> userList = userRepository.findAll();
         return userList;
+    }
+
+    public SiteUser selectUserOne(long id) {
+        log.info("[ProductDao] Product Select One");
+        // productRepository에서 select * from product;
+        SiteUser siteUser = userRepository.getReferenceById(id);
+        return siteUser;
     }
 
      // D(Delete) : id

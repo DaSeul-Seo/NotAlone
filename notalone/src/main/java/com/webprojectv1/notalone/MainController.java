@@ -21,8 +21,7 @@ public class MainController {
 
     @Autowired
     private ProductService productService;
-    @Autowired
-    private CartService cartService;
+    
     @Autowired
     private UserService userService;
 
@@ -32,11 +31,11 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping(value = "/product/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Integer id) {
-        model.addAttribute("product", productService.selectProductOne(id));
-        return "product-detail";
-    }
+    // @GetMapping(value = "/product/detail/{id}")
+    // public String detail(Model model, @PathVariable("id") Integer id) {
+    //     model.addAttribute("product", productService.selectProductOne(id));
+    //     return "product-detail";
+    // }
 
     @GetMapping("/login")
     public String login() {

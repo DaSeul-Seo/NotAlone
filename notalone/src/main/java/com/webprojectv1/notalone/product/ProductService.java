@@ -14,29 +14,28 @@ public class ProductService {
     private ProductDao productDao;
 
     // C(Insert)
-    public void insertUpdateProduct(Product productDto) {
-        log.info("[ProductService] Product Insert And Update : " + productDto.toString());
-        productDao.insertUpdateProduct(productDto);
+    public void inserProduct(Product productDto) {
+        log.info("[ProductService] Product Insert : " + productDto.toString());
+        productDao.insertProduct(productDto);
     }
 
 
-    // R(Select)
+    // R(Select All)
     public List<Product> selectProductAll() {
         List<Product> productList = productDao.selectProductAll();
-        
-        // 비즈니스 로직 구현
-        // dto를 만들면 entity를 dto로 바꾸어서 return
-
         return productList;
     }
 
+    // R (Sselect One)
     public Product selectProductOne(long productId) {
         Product productEntity = productDao.selectProductOne(productId);
-        
-        // 비즈니스 로직 구현
-        // dto를 만들면 entity를 dto로 바꾸어서 return
-
+        log.info(productEntity.toString());
         return productEntity;
+    }
+
+    // U(Update)
+    public void updateProduct(Product productDto, Long productId) {
+        productDao.updateProduct(productDto, productId);
     }
 
     // D(Delete)
