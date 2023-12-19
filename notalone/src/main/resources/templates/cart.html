@@ -59,8 +59,18 @@
                 <td>
                   <!-- <a th:href="@{/cart/update(cartItemId=${cartItem.cartItemId})}" class="btn btn-primary">수정</a>
                   <a th:href="@{/cart/delete(cartItemId=${cartItem.cartItemId})}" class="btn btn-danger">삭제</a> -->
-                  <button type="button" class="btn btn-primary" th:attr="data-target='#modalUpdate' + ${status.index}" data-toggle="modal">수정</button>
-            <button type="button" class="btn btn-danger" th:attr="data-target='#modalDelete' + ${status.index}" data-toggle="modal">삭제</button>
+                  <button 
+                    type="button"
+                    class="btn btn-primary"
+                    data-toggle="modal"
+                    th:attr="data-target='#modalUpdate'"
+                    >수정</button>
+                  <button 
+                    type="button"
+                    class="btn btn-danger"
+                    data-toggle="modal"
+                    th:attr="data-target='#modalDelete'"
+                    >삭제</button>
                 </td>
               </tr>
               <tr style="text-align: center;">
@@ -100,5 +110,78 @@
         </div>
       </div>
     </section>
+    <!-- 수정 모달 -->
+    <div 
+      class="modal fade"
+      th:id="'modalUpdate'"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+      >
+        <!-- 모달 내용 -->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header flex-column">
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <!-- 수정 모달 내용 -->
+                <h5 
+                  class="modal-title"
+                  style="text-align: center;"
+                  >수정하시겠습니까?</h5>
+                <div class="row w-50">
+                  <form th:action="@{/cart/update}" method="post">
+                    <button type="submit" id="updateCart" class="btn custom-btn cart-btn ms-lg-4">Yes</button>
+                    <button type="submit" class="btn custom-btn cart-btn ms-lg-4">No</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 삭제 모달 -->
+    <div 
+      class="modal fade" 
+      th:id="'modalDelete'" 
+      tabindex="-1" 
+      role="dialog" 
+      aria-labelledby="exampleModalLabel" 
+      aria-hidden="true"
+      >
+        <!-- 모달 내용 -->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header flex-column">
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <!-- 삭제 모달 내용 -->
+                <h5 
+                  class="modal-title"
+                  style="text-align: center;"
+                  >삭제하시겠습니까?</h5>
+                <div class="row w-50">
+                  <form th:action="@{/cart/delete}" method="post">
+                    <button type="submit" id="deleteCart" class="btn custom-btn cart-btn ms-lg-4">Yes</button>
+                    <button type="submit" class="btn custom-btn cart-btn ms-lg-4">No</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
   </div>
 </html>
