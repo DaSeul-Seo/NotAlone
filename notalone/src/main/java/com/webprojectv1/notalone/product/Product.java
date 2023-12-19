@@ -1,6 +1,5 @@
 package com.webprojectv1.notalone.product;
 
-import com.webprojectv1.notalone.cart.Cart;
 import com.webprojectv1.notalone.review.Review;
 
 import jakarta.persistence.*;
