@@ -23,6 +23,9 @@ public class Cart {
     @Column(nullable = false)
     private int cartCount;
     
+    @Column(nullable = false)
+    private char isPurchase = '0';
+
     @ManyToMany
     private List<Product> productList = new ArrayList<>();
     
