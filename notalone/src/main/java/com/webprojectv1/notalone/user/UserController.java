@@ -2,6 +2,7 @@ package com.webprojectv1.notalone.user;
 
 import jakarta.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +15,8 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
-    private final UserService userService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/signup")
     public String signup(UserCreateForm userCreateForm) {
@@ -34,8 +35,8 @@ public class UserController {
             return "sign-up";
         }
 
-        userService.create(userCreateForm.getUserName(), 
-                userCreateForm.getEmail(), userCreateForm.getPassword1());
+        userService.create(userCreateForm.getUserId(), 
+                userCreateForm.getPassword1());
 
         return "redirect:/";
     }

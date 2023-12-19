@@ -21,18 +21,13 @@ public class SiteUser {
     @Column(nullable = false)
     private String userPw;
 
-    @Column(nullable = false)
     private String userName;
 
-    @Column(nullable = false)
     private String userBirth;
 
     private String userPhoneNumber;
     
     private String userAddress;
-
-    @Column(nullable = false)
-    private char isGrant;
 
     @OneToMany(mappedBy = "siteUser")
     private List<Cart> cartList = new ArrayList<>();

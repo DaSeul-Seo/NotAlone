@@ -6,18 +6,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RequiredArgsConstructor
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-
-
+    @Autowired
+    private IUserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private UserDao userDao;
 
@@ -40,10 +38,9 @@ public class UserService {
         userDao.deleteUser(userId);
     }
 
-    public SiteUser create(String username, String email, String password) {
+    public SiteUser create(String userId, String password) {
         SiteUser user = new SiteUser();
-        user.setUserName(username);
-        user.setUserAddress(email);
+        user.setUserId(userId);
         user.setUserPw(passwordEncoder.encode(password));
         this.userRepository.save(user);
         return user;
