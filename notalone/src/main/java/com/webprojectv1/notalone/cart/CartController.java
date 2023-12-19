@@ -24,19 +24,20 @@ public class CartController {
         return "cart";
     }
 
-    @PostMapping("/saveCart")    
-    public String saveCartItem(@ModelAttribute CartItem cartItemDto){
-        log.info("saveCart");
-        cartItemService.insertUpdateCartItem(cartItemDto);
+    @PostMapping("/saveCartItem")    
+    public String saveCartItem(@ModelAttribute("cartItem") CartItem cartItemDto){
+        log.info("saveCartItem");
+        log.info("cartItemDto : " + cartItemDto.toString());
+        cartItemService.insertCartItem(cartItemDto);
         return "redirect:/";
     }
 
-    @PostMapping("/update")    
-    public String updateCartItem(@ModelAttribute CartItem cartItemDto){
-        log.info("updateCartItem");
-        cartItemService.insertUpdateCartItem(cartItemDto);
-        return "redirect:/";
-    }
+    // @PostMapping("/update")    
+    // public String updateCartItem(@ModelAttribute CartItem cartItemDto){
+    //     log.info("updateCartItem");
+    //     cartItemService.updateCartItem(cartItemDto);
+    //     return "redirect:/";
+    // }
 
     @PostMapping("/delete")    
     public String deleteCartItem(@ModelAttribute CartItem cartItemDto){

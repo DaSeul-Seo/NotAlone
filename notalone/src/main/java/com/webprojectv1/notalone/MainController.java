@@ -5,11 +5,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import java.security.Principal;
 
+import com.webprojectv1.notalone.cart.CartService;
 import com.webprojectv1.notalone.product.ProductService;
+import com.webprojectv1.notalone.user.SiteUser;
 import com.webprojectv1.notalone.user.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -55,23 +57,11 @@ public class MainController {
         return "admin";
     }
 
-    @GetMapping("/cart")
-    public String cart(Model model) {
-        model.addAttribute("cartList", cartService.selectCartAll());
-        return "cart";
-    }
-
-    @PostMapping("/saveCart")
-    public String saveCart(@ModelAttribute Cart cartDto) {
-        log.info("saveCart");
-        cartService.insertAndUpdateUser(cartDto);
-        return "redirect:/";
-    }
-
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/mypage")
     public String mypage(Model model, Principal principal) {
-        model.addAttribute("user", userService.getUser(principal.getName()));
+        SiteUser user = userService.getUser(principal.getName());
+        model.addAttribute("user", user);
         return "mypage";
     }
 
