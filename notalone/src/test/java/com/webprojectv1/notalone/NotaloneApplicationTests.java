@@ -22,8 +22,6 @@ class NotaloneApplicationTests {
 	@Autowired
 	IUserRepository userRepository;
 
-	@Autowired
-	UserService userService;
 
 	@Test
 	void createProduct() {
@@ -38,10 +36,6 @@ class NotaloneApplicationTests {
 		iProductRepository.save(p);
 	}
 
-	@Test
-	public void testAssignAdminRoleToUserWithId1() {
-		userService.assignAdminRoleToUser(161L);
-	}
 
 	@Test
     public void testFindByUserId() {

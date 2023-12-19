@@ -46,10 +46,4 @@ public class UserService {
         return user;
     }
 
-    public void assignAdminRoleToUser(long userId) {
-        userRepository.findById(userId).ifPresent(user -> {
-            user.setRole(UserRole.ADMIN);
-            userRepository.save(user);
-        });
-    } 
 }
