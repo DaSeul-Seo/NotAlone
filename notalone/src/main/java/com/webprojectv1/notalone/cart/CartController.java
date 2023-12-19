@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.webprojectv1.notalone.product.Product;
+import com.webprojectv1.notalone.product.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,10 +29,12 @@ public class CartController {
     }
 
     @PostMapping("/saveCartItem")    
-    public String saveCartItem(@ModelAttribute("cartItem") CartItem cartItemDto){
+    public String saveCartItem(Cart cart, @RequestParam("productId") long productId, Model model){
         log.info("saveCartItem");
-        log.info("cartItemDto : " + cartItemDto.toString());
-        cartItemService.insertCartItem(cartItemDto);
+        // log.info("cartItemDto : " + cartItemDto.toString());
+        // Product selectProduct = productService.selectProductOne(cartItemDto.getProduct().getProductId());
+        // cartItemDto.setProduct(selectProduct);
+        // cartItemService.insertCartItem(cartItemDto);
         return "redirect:/";
     }
 

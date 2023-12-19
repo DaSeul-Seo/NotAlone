@@ -16,7 +16,7 @@ public class CartItemDao {
     // C(Insert) & U(Update)
     // save :  엔티티의 ID가 이미 존재하면 업데이트를 수행하고, 
     //         ID가 없으면 새로운 엔티티를 저장하기 때문에 합침
-    public void insertUpdateCartItem(CartItem cartItemEntity) {
+    public void insertCartItem(CartItem cartItemEntity) {
         log.info("[CartItemDao] CartItem Insert And Update : " + cartItemEntity.toString());
         cartItemRepository.save(cartItemEntity);
     }

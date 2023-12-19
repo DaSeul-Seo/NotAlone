@@ -14,10 +14,10 @@ public class CartItemService {
     private CartItemDao cartItemDao;
 
     // C(Insert) & U(Update)
-    public void insertUpdateCartItem(CartItem cartItemDto) {
+    public void insertCartItem(CartItem cartItemDto) {
         log.info("[CartItemService] CartItem Insert And Update");
 
-        cartItemDao.insertUpdateCartItem(cartItemDto);
+        cartItemDao.insertCartItem(cartItemDto);
     }
 
     // R(Select)
