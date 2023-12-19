@@ -1,10 +1,13 @@
 package com.webprojectv1.notalone;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import java.security.Principal;
 
 import com.webprojectv1.notalone.product.ProductService;
 
@@ -47,9 +50,23 @@ public class MainController {
             return "admin";
     }
 
+    @GetMapping("/cart")    
+    public String cart(Model model){
+        model.addAttribute("cartList", cartService.selectCartAll());
+        return "cart";
+    }
+
+    @PostMapping("/saveCart")    
+    public String saveCart(@ModelAttribute Cart cartDto){
+        log.info("saveCart");
+        cartService.insertAndUpdateUser(cartDto);
+        return "redirect:/";
+    }
+
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/mypage")    
-    public String mypage(){
-        return "mypage";
+    public String mypage(Principal principal){
+            return "mypage";
     }
 
 }
