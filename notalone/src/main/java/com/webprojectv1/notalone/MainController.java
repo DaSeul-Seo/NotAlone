@@ -35,7 +35,7 @@ public class MainController {
     public String admin(Model model) {
         model.addAttribute("productList", productService.selectProductAll());
 
-        return "admin";
+        return "redirect:http://localhost:8000/admin";
     }
 
     // @PreAuthorize("isAuthenticated()")
