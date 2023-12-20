@@ -1,8 +1,8 @@
 package com.webprojectv1.notalone.user;
 
 import com.webprojectv1.notalone.cart.Cart;
-import com.webprojectv1.notalone.order.Order;
-import com.webprojectv1.notalone.order.OrderItem;
+import com.webprojectv1.notalone.purchase.Purchase;
+import com.webprojectv1.notalone.purchase.PurchaseItem;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -38,9 +38,9 @@ public class SiteUser {
 
     // 구매자의 주문
     @OneToMany(mappedBy = "siteUser")
-    private List<Order> userOrderList = new ArrayList<>();
+    private List<Purchase> userPurchaseList = new ArrayList<>();
 
     // 구매자의 주문상품들
     @OneToMany(mappedBy = "siteUser")
-    private List<OrderItem> userOrderItemList = new ArrayList<>();
+    private List<PurchaseItem> userPurchaseItemList = new ArrayList<>();
 }

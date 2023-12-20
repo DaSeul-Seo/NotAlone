@@ -53,12 +53,12 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr style="text-align: center;" th:each="orderItem : ${orderItemList}">
-                    <td scope="row" th:text="${orderItem.orderItemId}"></td>
-                    <td scope="row" th:text="${orderItem.productName}" ></td>
-                    <td scope="row" th:text="${orderItem.orderCount}" ></td>
-                    <td scope="row" th:text="${orderItem.productPrice}" ></td>
-                    <td scope="row" th:text="${orderItem.order.orderDate}" ></td>
+                  <tr style="text-align: center;" th:each="purchaseItem : ${purchaseItemList}">
+                    <td scope="row" th:text="${purchaseItem.purchaseItemId}"></td>
+                    <td scope="row" th:text="${purchaseItem.productName}" ></td>
+                    <td scope="row" th:text="${purchaseItem.purchaseCount}" ></td>
+                    <td scope="row" th:text="${purchaseItem.productPrice}" ></td>
+                    <td scope="row" th:text="${purchaseItem.purchase.purchaseDate}" ></td>
                   </tr>
                 </tbody>
                 <!-- <tfoot>

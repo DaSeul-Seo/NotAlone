@@ -1,4 +1,4 @@
-package com.webprojectv1.notalone.order;
+package com.webprojectv1.notalone.purchase;
 
 import com.webprojectv1.notalone.cart.CartItem;
 import com.webprojectv1.notalone.user.SiteUser;
@@ -8,14 +8,14 @@ import lombok.Data;
 
 @Data
 @Entity
-public class OrderItem {
+public class PurchaseItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderItemId;
+    private Long purchaseItemId;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="orderId")
-    private Order order;
+    @JoinColumn(name="purchaseId")
+    private Purchase purchase;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id")
@@ -28,7 +28,7 @@ public class OrderItem {
     private Long productId; // 주문 상품 번호
     private String productName; // 주문 상품 이름
     private int productPrice; // 주문 상품 가격
-    private int orderCount; // 주문 상품 수량
+    private int purchaseCount; // 주문 상품 수량
     private int productTotalPrice; // 가격*수량
 
     // @OneToOne(fetch = FetchType.EAGER)
@@ -38,15 +38,15 @@ public class OrderItem {
     // private int isCancel; // 주문 취소 여부 (0:주문완료 / 1:주문취소)
 
     // 장바구니 전체 주문
-    public static OrderItem createOrderItem(Long productId, SiteUser siteUser, CartItem cartItem) {
-        OrderItem orderItem = new OrderItem();
-        orderItem.setProductId(productId);
-        orderItem.setSiteUser(siteUser);
-        orderItem.setProductName(cartItem.getProduct().getProductName());
-        orderItem.setProductPrice(cartItem.getProduct().getProductPrice());
-        orderItem.setOrderCount(cartItem.getCartItemCount());
-        orderItem.setProductTotalPrice(cartItem.getProduct().getProductPrice()*cartItem.getCartItemCount());
-        return orderItem;
+    public static PurchaseItem createPurchaseItem(Long productId, SiteUser siteUser, CartItem cartItem) {
+        PurchaseItem purchaseItem = new PurchaseItem();
+        purchaseItem.setProductId(productId);
+        purchaseItem.setSiteUser(siteUser);
+        purchaseItem.setProductName(cartItem.getProduct().getProductName());
+        purchaseItem.setProductPrice(cartItem.getProduct().getProductPrice());
+        purchaseItem.setPurchaseCount(cartItem.getCartItemCount());
+        purchaseItem.setProductTotalPrice(cartItem.getProduct().getProductPrice()*cartItem.getCartItemCount());
+        return purchaseItem;
     }
 
     // // 상품 개별 주문
