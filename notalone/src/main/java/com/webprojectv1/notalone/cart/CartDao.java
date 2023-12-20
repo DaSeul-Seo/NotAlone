@@ -79,6 +79,10 @@ public class CartDao {
         return UserCartItemList;
     }
 
+    public Cart findCartBySiteUser_Id(long id) {
+        return cartRepository.findCartBySiteUser_Id(id);
+    }
+
     // R(Select)
     public List<Cart> selectCartAll() {
         log.info("[CartDao] Cart Select All");

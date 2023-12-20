@@ -32,6 +32,10 @@ public class CartService {
         return cartDao.allUserCartView(userCart);
     }
 
+    public Cart findUserCart(long id) {
+        return cartDao.findCartBySiteUser_Id(id);
+    }
+
     // R(Select)
     public List<Cart> selectCartAll() {
         log.info("[CartService] Cart Select");
