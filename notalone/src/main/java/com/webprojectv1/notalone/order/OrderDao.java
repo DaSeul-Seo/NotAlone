@@ -3,6 +3,10 @@ package com.webprojectv1.notalone.order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.webprojectv1.notalone.cart.CartItem;
+import com.webprojectv1.notalone.user.IUserRepository;
+import com.webprojectv1.notalone.user.SiteUser;
+
 import java.util.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,33 +14,57 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class OrderDao {
     @Autowired
-    private IOrderRepository purchaseRepository;
+    private IOrderRepository orderRepository;
+
+    @Autowired
+    private IOrderItemRepository orderItemRepository;
+
+    @Autowired
+    private IUserRepository userRepository;
+
+    public void createOrder(SiteUser siteUser){
+        Order order = Order.createOrder(siteUser);
+        orderRepository.save(order);
+    }
+
+    public void addOrder(SiteUser siteUser, List<OrderItem> orderItemList) {
+        Order userOrder = Order.createOrder(siteUser, orderItemList);
+        orderRepository.save(userOrder);
+    }
+
+    public OrderItem addCartOrder(long productId, long id, CartItem cartItem) {
+        SiteUser siteUser = userRepository.getReferenceById(id);
+        OrderItem orderItem = OrderItem.createOrderItem(productId, siteUser, cartItem);
+        orderItemRepository.save(orderItem);
+        return orderItem;
+    }
+
+    public List<OrderItem> findUserOrderItemList(long id) {
+        return orderItemRepository.findOrderItemListBySiteUser_Id(id);
+    }
 
     // C(Insert) & U(Update)
-    // save :  엔티티의 ID가 이미 존재하면 업데이트를 수행하고, 
-    //         ID가 없으면 새로운 엔티티를 저장하기 때문에 합침
-    public void insertAndUpdatePurchase(Purchase purchaseEntity) {
-        log.info("[PurchaseDao] Purchase Insert And Update : " + purchaseEntity.toString());
-        purchaseRepository.save(purchaseEntity);
+    public void insertOrder(Order orderEntity) {
+        log.info("[OrderDao] Order : " + orderEntity.toString());
+        orderRepository.save(orderEntity);
     }
 
     // R(Select)
-    public List<Purchase> selectUserAll() {
-        log.info("[PurchaseDao] Purchase Select All");
-        // userRepository에서 select * from user;
-        List<Purchase> purchaseList = purchaseRepository.findAll();
-        return purchaseList;
+    public List<Order> selectOrderAll() {
+        log.info("[OrderDao] Order Select All");
+        List<Order> OrderList = orderRepository.findAll();
+        return OrderList;
     }
 
      // D(Delete) : id
-    public void deletePurchase(long purchaseId) {
-        Purchase savedpurchase = purchaseRepository.getReferenceById(purchaseId);
+    public void deleteOrder(long orderId) {
+        Order savedOrder = orderRepository.getReferenceById(orderId);
         // 삭제하고자 하는 데이터를 DB에서 확인
-        if (savedpurchase == null) {
-            log.info("[PurchaseDao] Failed Purchase Delete : Does not exist. : " + purchaseId);
+        if (savedOrder == null) {
+            log.info("[OrderDao] Failed Order Delete : Does not exist. : " + orderId);
             return;
         }
-        log.info("Purchase Delete");
-        purchaseRepository.deleteById(purchaseId);
+        log.info("Order Delete");
+        orderRepository.deleteById(orderId);
     }
 }

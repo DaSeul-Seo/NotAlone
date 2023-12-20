@@ -44,4 +44,8 @@ public class CartService {
         log.info("[CartService] Cart Delete");
         cartDao.deleteCart(cartId);
     }
+
+    public void allCartItemDelete(long id) {
+        cartDao.allCartItemDelete(id);
+    }
 }

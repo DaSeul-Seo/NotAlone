@@ -1,6 +1,8 @@
 package com.webprojectv1.notalone.user;
 
+import com.mysql.cj.x.protobuf.MysqlxCrud.Order;
 import com.webprojectv1.notalone.cart.Cart;
+import com.webprojectv1.notalone.order.OrderItem;
 import com.webprojectv1.notalone.review.Review;
 
 import jakarta.persistence.*;
@@ -33,8 +35,13 @@ public class SiteUser {
     private Cart cart;
 
     // @OneToMany(mappedBy = "siteUser")
-    // private List<Cart> cartList = new ArrayList<>();
+    // private List<Review> reviewList = new ArrayList<>();
 
+    // 구매자의 주문
     @OneToMany(mappedBy = "siteUser")
-    private List<Review> reviewList = new ArrayList<>();
+    private List<Order> userOrderList = new ArrayList<>();
+
+    // 구매자의 주문상품들
+    @OneToMany(mappedBy = "siteUser")
+    private List<OrderItem> userOrderItemList = new ArrayList<>();
 }

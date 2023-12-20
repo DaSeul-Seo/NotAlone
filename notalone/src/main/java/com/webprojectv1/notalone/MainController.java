@@ -26,12 +26,6 @@ public class MainController {
         return "index";
     }
 
-    // @GetMapping(value = "/product/detail/{id}")
-    // public String detail(Model model, @PathVariable("id") Integer id) {
-    //     model.addAttribute("product", productService.selectProductOne(id));
-    //     return "product-detail";
-    // }
-
     @GetMapping("/login")
     public String login() {
         return "login";

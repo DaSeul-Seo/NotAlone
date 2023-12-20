@@ -14,42 +14,37 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long orderId;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private User user; // 구매자
+    @JoinColumn(name = "id")
+    private SiteUser siteUser; // 구매자
 
     @OneToMany(mappedBy = "order")
-    private List<OrderItem> orderItems = new ArrayList<>();
+    private List<OrderItem> orderItemList = new ArrayList<>();
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
-    private LocalDate createDate; // 구매 날짜
-
-    @PrePersist
-    public void createDate() {
-        this.createDate = LocalDate.now();
-    }
+    @Column(nullable = false)
+    private Date orderDate = new Date();
 
     public void addOrderItem(OrderItem orderItem) {
-        orderItems.add(orderItem);
+        orderItemList.add(orderItem);
         orderItem.setOrder(this);
     }
 
-    public static Order createOrder(User user, List<OrderItem> orderItemList) {
+    public static Order createOrder(SiteUser siteUser, List<OrderItem> orderItemList) {
         Order order = new Order();
-        order.setUser(user);
+        order.setSiteUser(siteUser);
         for (OrderItem orderItem : orderItemList) {
             order.addOrderItem(orderItem);
         }
-        order.setCreateDate(order.createDate);
+        order.setOrderDate(order.orderDate);
         return order;
     }
 
-    public static Order createOrder(User user) {
+    public static Order createOrder(SiteUser siteUser) {
         Order order = new Order();
-        order.setUser(user);
-        order.setCreateDate(order.createDate);
+        order.setSiteUser(siteUser);
+        order.setOrderDate(order.orderDate);
         return order;
     }
 

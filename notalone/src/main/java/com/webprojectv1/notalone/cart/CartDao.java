@@ -97,4 +97,17 @@ public class CartDao {
         log.info("Cart Delete");
         cartRepository.deleteById(cartId);
     }
+
+    public void allCartItemDelete(long id) {
+        // 전체 cartItem 찾기
+        List<CartItem> cartItemList = cartItemRepository.findAll();
+
+        // 반복문을 이용하여 해당하는 User 의 CartItem 만 찾아서 삭제
+        for(CartItem cartItem : cartItemList){
+            if(cartItem.getCart().getSiteUser().getId() == id) {
+                cartItem.getCart().setCartCount(0);
+                cartItemRepository.deleteById(cartItem.getCartItemId());
+            }
+        }
+    }
 }
