@@ -1,6 +1,5 @@
 package com.webprojectv1.notalone.order;
 
-import com.webprojectv1.notalone.cart.CartItem;
 import com.webprojectv1.notalone.user.SiteUser;
 
 import jakarta.persistence.*;

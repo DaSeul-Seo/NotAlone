@@ -1,9 +1,8 @@
 package com.webprojectv1.notalone.user;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud.Order;
 import com.webprojectv1.notalone.cart.Cart;
+import com.webprojectv1.notalone.order.Order;
 import com.webprojectv1.notalone.order.OrderItem;
-import com.webprojectv1.notalone.review.Review;
 
 import jakarta.persistence.*;
 import lombok.Data;
