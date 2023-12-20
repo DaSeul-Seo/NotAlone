@@ -39,9 +39,9 @@ public class CartController {
         SiteUser siteUser = userService.getUser(principal.getName());
         Cart cart = siteUser.getCart();
 
-        // if (cart == null) {
-        //     return "redirect:/";
-        // }
+        if (cart == null) {
+            return "redirect:/";
+        }
 
         // 장바구니에 들어있는 아이템 모두 가져오기
         List<CartItem> cartItemList = cartService.allUserCartView(cart);
