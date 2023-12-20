@@ -111,6 +111,7 @@ public class CartDao {
             if(cartItem.getCart().getSiteUser().getId() == id) {
                 cartItem.getCart().setCartCount(0);
                 cartItemRepository.deleteById(cartItem.getCartItemId());
+                cartRepository.deleteById(cartItem.getCart().getCartId());
             }
         }
     }

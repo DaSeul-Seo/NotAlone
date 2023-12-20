@@ -3,10 +3,12 @@ package com.webprojectv1.notalone.purchase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 
@@ -16,11 +18,10 @@ import com.webprojectv1.notalone.cart.CartService;
 import com.webprojectv1.notalone.user.SiteUser;
 import com.webprojectv1.notalone.user.UserService;
 
-import lombok.extern.slf4j.Slf4j;
 import java.util.*;
 
-@Slf4j
 @Controller
+@RequestMapping(value = "/mypage")
 public class PurchaseController {
 
     @Autowired
@@ -32,8 +33,7 @@ public class PurchaseController {
     @Autowired
     private CartService cartService;
 
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/mypage")
+    @GetMapping
     public String purchaseSelectAll(Principal principal, Model model) {
         // 로그인이 되어있는 유저의 id와 주문 내역에 접속하는 id가 같아야 함
         SiteUser siteUser = userService.getUser(principal.getName());
@@ -59,8 +59,9 @@ public class PurchaseController {
         // }
     }
     
-    @PostMapping("/mypage/insertPurchase")
-    public String  insertPurchase(Principal principal, Model model) {
+    @Transactional
+    @PostMapping("/insertPurchase")
+    public String  insertPurchase(Principal principal) {
         // 유저 정보
         SiteUser siteUser = userService.getUser(principal.getName());
 
@@ -85,8 +86,8 @@ public class PurchaseController {
         purchaseService.addPurchase(siteUser, purchaseItemList);
         cartService.allCartItemDelete(siteUser.getId());
 
-        model.addAttribute("userCartItemList", userCartItemList);
-        model.addAttribute("user", userService.selectUserOne(siteUser.getId()));
+        // model.addAttribute("userCartItemList", userCartItemList);
+        // model.addAttribute("user", userService.selectUserOne(siteUser.getId()));
         return "redirect:/mypage";
     }
 }
