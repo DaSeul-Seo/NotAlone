@@ -1,6 +1,8 @@
 package com.webprojectv1.notalone.cart;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import com.webprojectv1.notalone.user.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.security.Principal;
 import java.util.*;
 
 @Slf4j
@@ -31,14 +34,15 @@ public class CartController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/{id}")
-    public String getcartItemList(@PathVariable("id") Long id, Model model){
-        SiteUser siteUser = userService.selectUserOne(id);
+    @GetMapping
+    public String getcartItemList(Model model, Principal principal) {
+        log.info("getcartItemList 들어옴");
+        SiteUser siteUser = userService.getUser(principal.getName());
         Cart cart = siteUser.getCart();
 
-        if (cart == null) {
-            return "redirect:/";
-        }
+        // if (cart == null) {
+        //     return "redirect:/";
+        // }
 
         // 장바구니에 들어있는 아이템 모두 가져오기
         List<CartItem> cartItemList = cartService.allUserCartView(cart);
@@ -51,22 +55,21 @@ public class CartController {
 
         model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("totalCount", cart.getCartCount());
-        model.addAttribute("cartItems", cartItemList);
-        model.addAttribute("user", userService.selectUserOne(id));
+        model.addAttribute("cartItemList", cartItemList);
+        model.addAttribute("user", userService.selectUserOne(siteUser.getId()));
 
-        return "redirect:/";
+        return "cart";
     }
 
-    // @PostMapping("/insertCart/{id}/{productId}")
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/insertCart/{productId}")
-    // public String insertCart(@PathVariable("id") Long id, @PathVariable("productId") Long productId, int amount){
-    public String insertCart(@PathVariable("productId") Long productId, int amount){
-        SiteUser siteUser = userService.selectUserOne(1);
+    public String insertCart(@PathVariable("productId") Long productId, int amount, Principal principal){
+        SiteUser siteUser = userService.getUser(principal.getName());
         Product product = productService.selectProductOne(productId);
 
         cartService.insertCart(siteUser, product, amount);
 
-        return "redirect:/";
+        return "redirect:/cart";
     }
 
     // @PostMapping("/update")    

@@ -1,4 +1,4 @@
-package com.webprojectv1.notalone.purchase;
+package com.webprojectv1.notalone.order;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,9 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class PurchaseDao {
+public class OrderDao {
     @Autowired
-    private IPurchaseRepository purchaseRepository;
+    private IOrderRepository purchaseRepository;
 
     // C(Insert) & U(Update)
     // save :  엔티티의 ID가 이미 존재하면 업데이트를 수행하고, 

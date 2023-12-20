@@ -22,12 +22,15 @@ public class CartDao {
     @Autowired
     private IProductRepository productRepository;
 
+    public void createCart(SiteUser user) {
+        Cart cart = Cart.createCart(user);
+        cartRepository.save(cart);
+    }
+
     // C(Insert) & U(Update)
-    // save :  엔티티의 ID가 이미 존재하면 업데이트를 수행하고, 
-    //         ID가 없으면 새로운 엔티티를 저장하기 때문에 합침
     public void insertCart(SiteUser siteUserDto, Product productDto, int amount) {
         log.info("[CartDao] Cart Insert");
-        Cart cart = cartRepository.getReferenceById(siteUserDto.getId());
+        Cart cart = cartRepository.findBySiteUser_Id(siteUserDto.getId());
 
         // 장바구니가 존재하지 않는다면
         if (cart == null) {
@@ -62,18 +65,18 @@ public class CartDao {
         long userCartId = userCart.getCartId();
 
         // id에 해당하는 유저가 담은 상품들 넣어둘 곳
-        List<CartItem> UserCartItems = new ArrayList<>();
+        List<CartItem> UserCartItemList = new ArrayList<>();
 
         // 유저 상관 없이 카트에 있는 상품 모두 불러오기
-        List<CartItem> CartItems = cartItemRepository.findAll();
+        List<CartItem> CartItemList = cartItemRepository.findAll();
 
-        for(CartItem cartItem : CartItems) {
+        for(CartItem cartItem : CartItemList) {
             if(cartItem.getCart().getCartId() == userCartId) {
-                UserCartItems.add(cartItem);
+                UserCartItemList.add(cartItem);
             }
         }
 
-        return UserCartItems;
+        return UserCartItemList;
     }
 
     // R(Select)

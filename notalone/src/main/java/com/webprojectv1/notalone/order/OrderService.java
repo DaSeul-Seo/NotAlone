@@ -1,4 +1,4 @@
-package com.webprojectv1.notalone.purchase;
+package com.webprojectv1.notalone.order;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,9 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class PurchaseService {
+public class OrderService {
     @Autowired
-    private PurchaseDao purchaseDao;
+    private OrderDao purchaseDao;
 
     // C(Insert) & U(Update)
     public void insertAndUpdatePurchase(Purchase purchaseDto) {

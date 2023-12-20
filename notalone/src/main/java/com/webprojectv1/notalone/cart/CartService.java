@@ -15,6 +15,10 @@ public class CartService {
     @Autowired
     private CartDao cartDao;
 
+    public void createCart(SiteUser user){
+        cartDao.createCart(user);
+    }
+
     // C(Insert) & U(Update)
     public void insertCart(SiteUser siteUserDto, Product productDto, int amount) {
         log.info("[CartService] Cart Insert");
@@ -24,6 +28,7 @@ public class CartService {
     // 카트 상품 리스트 중 해당하는 유저가 담은 상품만 반환
     // 유저의 카트 id와 카트상품의 카트 id가 같아야 함
     public List<CartItem> allUserCartView(Cart userCart) {
+        log.info("[CartService] Cart allUserCartView");
         return cartDao.allUserCartView(userCart);
     }
 
