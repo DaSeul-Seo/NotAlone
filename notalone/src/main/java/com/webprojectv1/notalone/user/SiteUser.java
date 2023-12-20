@@ -1,14 +1,20 @@
 package com.webprojectv1.notalone.user;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.mysql.cj.x.protobuf.MysqlxCrud.Order;
 import com.webprojectv1.notalone.cart.Cart;
 import com.webprojectv1.notalone.order.OrderItem;
-import com.webprojectv1.notalone.review.Review;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
-
-import java.util.*;
 
 @Data
 @Entity
