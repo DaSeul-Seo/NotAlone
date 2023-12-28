@@ -11,13 +11,13 @@ spring:
     
     # Database(MySQL) 설정!!
     datasource:
-        url: jdbc:mysql://127.0.0.1:3306/examplesdb?userSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
+        url: jdbc:mysql://hyul-server:3306/examplesdb?userSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
         driver-class-name: com.mysql.cj.jdbc.Driver
         # log4jdbc 적용!!
         # url: jdbc:log4jdbc:mysql://localhost:3306/examplesdb?userSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
         # driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-        username: urstory
-        password: u1234
+        username: test
+        password: test1234
 
     # JPA 설정
     jpa:
