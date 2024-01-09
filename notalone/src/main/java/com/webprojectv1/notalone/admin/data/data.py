@@ -24,7 +24,7 @@ cursor.execute('''
 ''')
 
 # CSV 파일에서 데이터 읽어와서 데이터베이스에 삽입
-with open('./data/train_v3.csv', 'r', encoding='utf-8') as csv_file:
+with open('./train.csv', 'r', encoding='utf-8') as csv_file:
     print("불러왔어")
     csv_reader = csv.reader(csv_file, delimiter=',')
     next(csv_reader)  # 첫 번째 행은 헤더이므로 건너뜁니다.
