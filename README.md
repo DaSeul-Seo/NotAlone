@@ -21,14 +21,14 @@
 - 개발도구
   - Docker
 
-![Alt text](stack.svg)
+![Alt text](./image/stack.svg)
 
 ### ERD
 
 - 초안 : <https://www.erdcloud.com/d/q39EXwXTKuBQk9YRk>
 - 최종
   
-![erd](./1_ERD.png)
+![erd](./image/1_ERD.png)
 
 ### 주요기능
 
@@ -50,7 +50,7 @@
     - 5일간 매출과 월간 매출을 차트로 볼 수 있다.
     - 판매량 예측을 제공받는다.
 
-![Alt text](flow.svg)
+![Alt text](./image/flow.svg)
 
 ### 작성문서
 
@@ -66,6 +66,6 @@
 
 #### transaction
 
-![Alt text](transaction.svg)
+![Alt text](./image/transaction.svg)
 
 
