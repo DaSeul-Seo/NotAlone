@@ -1,38 +1,41 @@
-# NotAlone
+# 머신러닝을 활용한 쇼핑몰 사이트 'NotAlone'
 
-### ✍️ 요약
+### 🍀 Member
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://github.com/hyul77"><img src="https://avatars.githubusercontent.com/u/100561170?v=4" width="100px;" alt=""/><br /><sub><b>이준혁</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/bbundnam"><img src="https://avatars.githubusercontent.com/u/145851524?v=4" width="100px;" alt=""/><br /><sub><b>정세홍</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/soljeong"><img src="https://avatars.githubusercontent.com/u/72812330?v=4" width="100px;" alt=""/><br /><sub><b>정솔</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/DaSeul-Seo"><img src="https://avatars.githubusercontent.com/u/67898022?v=4" width="100px;" alt=""/><br /><sub><b>서다슬</b></sub></a><br /></td>
+    </tr>
+  </tbody>
+</table>
+
+### ✍️ 개발 목적 및 목표
 
 - 머신러닝을 활용한 쇼핑몰 사이트
 - 시작날짜 : 2023년 12월 14일
 - V0 완료날짜 : 2023년 12월 20일
 
-### 🛠 사용 기술 및 라이브러리
+### 🛠 개발환경 및 아키텍쳐
+![dev_environment](./image/dev_environment.png)
 
-- OS
-  - Windows10
-- Language / Tool
-  - Java / VisualStudioCode
-  - Python
-  - HTML, CSS, JavaScript
-- Database / Tool
-  - MySQL / DBeaver
-- 형상관리
-  - Git
-- 개발도구
-  - Docker
 
 ![Alt text](./image/stack.svg)
 
-### ERD
-
-- 초안 : <https://www.erdcloud.com/d/q39EXwXTKuBQk9YRk>
-- 최종
+### 🌐 ERD
   
 ![erd](./image/1_ERD.png)
 
-### 주요기능
+### 📒 주요기능
+![join_login](./image/join_login.png)
+![main_detail](./image/main_detail.png)
+![cart_mypage](./image/cart_mypage.png)
+![admin](./image/admin.png)
 
-1. 로그인
+<!-- 1. 로그인
     - 아이디, 비밀번호를 검증하여 로그인한다.
 2. 회원가입
     - 아이디 중복일 경우 회원가입 불가하다.
@@ -48,24 +51,10 @@
     - 사용자가 최종적으로 구매한 목록이 나타난다.
 7. 관리자
     - 5일간 매출과 월간 매출을 차트로 볼 수 있다.
-    - 판매량 예측을 제공받는다.
+    - 판매량 예측을 제공받는다. -->
 
 ![Alt text](./image/flow.svg)
 
-### 작성문서
+### 🌟 기대효과
 
-- WBS
-- 상세설계서
-- 상세 요구사항 명세서
-- 일간 업무 보고서
-- Issue List
-
-### 주요 이슈
-
-#### Cartitem
-
-#### transaction
-
-![Alt text](./image/transaction.svg)
-
-
+### 📽️ 시연영상
