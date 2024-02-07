@@ -58,3 +58,6 @@
 ### 🌟 기대효과
 
 ### 📽️ 시연영상
+
+https://github.com/DaSeul-Seo/NotAlone/assets/67898022/bfa48646-0945-4a50-ae5f-e7a21820e88b
+
